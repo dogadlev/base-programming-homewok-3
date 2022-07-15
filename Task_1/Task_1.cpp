@@ -14,29 +14,23 @@ public:
     
     bool set_num1(double num1) 
     {
-        std::cout << "Введите num1: ";
-        std::cin >> num1;
-
         if (num1 != 0.0) 
         {
             this->num1 = num1;
             return true;
         }
-        std::cout << "Неверный ввод!" << std::endl;
+     
         return false;
     }
 
     bool set_num2(double num2)
     {
-        std::cout << "Введите num2: ";
-        std::cin >> num2;
-
         if (num2 != 0.0)
         {
             this->num2 = num2;
             return true;
         }
-        std::cout << "Неверный ввод!" << std::endl;
+        
         return false;
     }
     
@@ -47,6 +41,30 @@ public:
     double divide_1_2() {return num1 / num2;}
     double divide_2_1() {return num2 / num1;}  
 };
+
+double getNum1() 
+{
+    double num1 = 0.0;
+    while(true)
+    {
+        std::cout << "Введите число num1: ";
+        std::cin >> num1;
+        if (num1 == 0.0) { std::cout << "Неверный ввод! На ноль делить нельзя." << std::endl; }
+        else { return num1; }
+    }
+}
+
+double getNum2()
+{
+    double num2 = 0.0;
+    while (true)
+    {
+        std::cout << "Введите число num2: ";
+        std::cin >> num2;
+        if (num2 == 0.0) { std::cout << "Неверный ввод! На ноль делить нельзя." << std::endl; }
+        else { return num2; }
+    }
+}
 
 void printResults(Calculator calc)
     {
@@ -61,19 +79,16 @@ void printResults(Calculator calc)
 int main(int argc, char** argv)
 {
     setlocale(LC_ALL, "Russian");
-
     double num1 = 0, num2 = 0;
-
     Calculator calc;
-
     do 
     {
-        while (!calc.set_num1(num1)) {}
-
-        while (!calc.set_num2(num2)) {}
-
-        printResults(calc);
-        
+        num1 = getNum1();
+        num2 = getNum2();
+        if (calc.set_num1(num1) && calc.set_num2(num2)) 
+        {
+            printResults(calc);
+        }        
     } while (true);
 
     return 0;
